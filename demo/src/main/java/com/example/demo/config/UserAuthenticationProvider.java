@@ -4,8 +4,9 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.sergio.jwt.backend.dtos.UserDto;
-import com.sergio.jwt.backend.services.UserService;
+
+import com.example.demo.dtos.UserDto;
+import com.example.demo.services.UserService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,8 +42,8 @@ public class UserAuthenticationProvider {
                 .withSubject(user.getLogin())
                 .withIssuedAt(now)
                 .withExpiresAt(validity)
-                .withClaim("firstName", user.getFirstName())
-                .withClaim("lastName", user.getLastName())
+                .withClaim("userName", user.getUserName())
+//                .withClaim("lastName", user.getLastName())
                 .sign(algorithm);
     }
 
@@ -56,8 +57,7 @@ public class UserAuthenticationProvider {
 
         UserDto user = UserDto.builder()
                 .login(decoded.getSubject())
-                .firstName(decoded.getClaim("firstName").asString())
-                .lastName(decoded.getClaim("lastName").asString())
+                .userName(decoded.getClaim("userName").asString())
                 .build();
 
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());

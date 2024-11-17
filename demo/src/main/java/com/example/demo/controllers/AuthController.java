@@ -1,10 +1,11 @@
 package com.example.demo.controllers;
 
-import com.sergio.jwt.backend.config.UserAuthenticationProvider;
-import com.sergio.jwt.backend.dtos.CredentialsDto;
-import com.sergio.jwt.backend.dtos.SignUpDto;
-import com.sergio.jwt.backend.dtos.UserDto;
-import com.sergio.jwt.backend.services.UserService;
+
+import com.example.demo.config.UserAuthenticationProvider;
+import com.example.demo.dtos.CredentialsDto;
+import com.example.demo.dtos.SignUpDto;
+import com.example.demo.dtos.UserDto;
+import com.example.demo.services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

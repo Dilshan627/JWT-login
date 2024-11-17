@@ -1,12 +1,12 @@
 package com.example.demo.services;
 
-import com.sergio.jwt.backend.dtos.CredentialsDto;
-import com.sergio.jwt.backend.dtos.SignUpDto;
-import com.sergio.jwt.backend.dtos.UserDto;
-import com.sergio.jwt.backend.entites.User;
-import com.sergio.jwt.backend.exceptions.AppException;
-import com.sergio.jwt.backend.mappers.UserMapper;
-import com.sergio.jwt.backend.repositories.UserRepository;
+import com.example.demo.dtos.CredentialsDto;
+import com.example.demo.dtos.SignUpDto;
+import com.example.demo.dtos.UserDto;
+import com.example.demo.entites.User;
+import com.example.demo.exceptions.AppException;
+import com.example.demo.mappers.UserMapper;
+import com.example.demo.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,15 +19,17 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
+//    private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
 
     private final UserMapper userMapper;
 
     public UserDto login(CredentialsDto credentialsDto) {
-        User user = userRepository.findByLogin(credentialsDto.login())
-                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+//        User user = userRepository.findByLogin(credentialsDto.login())
+//                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+
+        User user = new User(1L, "damitha", "john.doe", "$2a$10$ts5996Lgq2XReEsH9nyFr.qt0/7tsanzE6hxBx/vCbfUf5xgK.2Ry");
 
         if (passwordEncoder.matches(CharBuffer.wrap(credentialsDto.password()), user.getPassword())) {
             return userMapper.toUserDto(user);
@@ -36,23 +38,25 @@ public class UserService {
     }
 
     public UserDto register(SignUpDto userDto) {
-        Optional<User> optionalUser = userRepository.findByLogin(userDto.login());
+//        Optional<User> optionalUser = userRepository.findByLogin(userDto.login());
+//
+//        if (optionalUser.isPresent()) {
+//            throw new AppException("Login already exists", HttpStatus.BAD_REQUEST);
+//        }
+//
+//        User user = userMapper.signUpToUser(userDto);
+//        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.password())));
+//
+//        User savedUser = userRepository.save(user);
 
-        if (optionalUser.isPresent()) {
-            throw new AppException("Login already exists", HttpStatus.BAD_REQUEST);
-        }
-
-        User user = userMapper.signUpToUser(userDto);
-        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.password())));
-
-        User savedUser = userRepository.save(user);
-
-        return userMapper.toUserDto(savedUser);
+        return userMapper.toUserDto(null);
     }
-
+//
     public UserDto findByLogin(String login) {
-        User user = userRepository.findByLogin(login)
-                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+//        User user = userRepository.findByLogin(login)
+//                .orElseThrow(() -> new AppException("Unknown user", HttpStatus.NOT_FOUND));
+        User user = new User(1L, "damitha", "john.doe", "$2a$10$ts5996Lgq2XReEsH9nyFr.qt0/7tsanzE6hxBx/vCbfUf5xgK.2Ry");
+
         return userMapper.toUserDto(user);
     }
 

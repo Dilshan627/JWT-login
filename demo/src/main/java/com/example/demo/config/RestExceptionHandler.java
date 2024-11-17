@@ -1,7 +1,8 @@
 package com.example.demo.config;
 
-import com.sergio.jwt.backend.dtos.ErrorDto;
-import com.sergio.jwt.backend.exceptions.AppException;
+
+import com.example.demo.dtos.ErrorDto;
+import com.example.demo.exceptions.AppException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

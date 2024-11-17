@@ -1,8 +1,9 @@
 package com.example.demo.mappers;
 
-import com.sergio.jwt.backend.dtos.SignUpDto;
-import com.sergio.jwt.backend.dtos.UserDto;
-import com.sergio.jwt.backend.entites.User;
+
+import com.example.demo.dtos.SignUpDto;
+import com.example.demo.dtos.UserDto;
+import com.example.demo.entites.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

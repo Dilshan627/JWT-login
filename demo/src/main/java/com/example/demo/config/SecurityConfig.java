@@ -29,7 +29,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
                         .anyRequest().authenticated())
-        ;
+                .logout(logout -> logout
+                        .logoutUrl("/logout") // URL for logout
+                        .logoutSuccessUrl("/login") // Redirect to login page after logout
+                        .clearAuthentication(true) // Clear authentication
+                        .invalidateHttpSession(false) // Do not invalidate session (because we're using stateless JWT)
+                        .deleteCookies("JSESSIONID") // Optionally remove session cookies, if any
+                );
         return http.build();
     }
 }
